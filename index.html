@@ -1,0 +1,121 @@
+<html>
+    <head>
+            <meta charset="utf-8">
+            <title> Etch-a-Sketch</title>
+    </head>
+    <body>
+        <h1>Welcome to Katha's Sketchboard</h1>
+        <nav id="selection">
+            <button id="size">Size <br>
+            <button id="reset">Reset </button>
+            </div>
+            <div>Select color of sketchpen <br>
+                <input type="color" id="sketch-color" name="base" value=rgb(128,128,128)>
+            </div>
+        </nav>
+        <div id="container">
+
+        </div>
+    </body>
+</html>
+
+<style>
+    *{
+        margin:0%;
+        padding: 0%;
+        box-sizing: border-box;
+    }
+    
+    body{
+        background-color:blueviolet;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        color:black;
+    }
+    h1{
+        font-size: 5vw;
+        text-align: center;
+        margin-top: 1vw;
+    }
+    #selection{
+        width:100%;
+        justify-content: center;
+        display: flex;
+        margin: 1vw;
+    }
+
+    button{
+        background-color: yellow;
+        border-color: yellow;
+        border-radius: 25%;
+        margin:0 1vw;
+        padding: 0.5vw
+    }
+  
+    #container{
+        display:flex;
+        flex-wrap: wrap;
+        background-color:white;
+        width: 31vw;
+        height: 31vw;
+        justify-content:center;
+        margin: 0vw auto; 
+        padding: 0vw;
+        border: 0.5vw solid black;
+    }
+    #square{
+        margin: 0px;
+        border: 0.1vw solid lightgrey;
+    }
+    #square:hover{
+        background-color: rgba(128,128,128,0.3);
+    }
+
+</style>
+
+<script>
+const container=document.querySelector("#container")
+const btn=document.querySelector("#size");
+let mouseClick;
+let userClick=document.querySelectorAll("body");
+userClick.forEach(userClick =>userClick.addEventListener('mousedown',()=>{mouseClick=true;}));
+userClick.forEach(userClick =>userClick.addEventListener('mouseup',()=>{mouseClick=false;}));
+const reset=document.querySelector("#reset");
+reset.addEventListener('click',()=>{createGrid(size)});
+let size;
+createGrid(size);
+btn.addEventListener('click',()=>{
+                                size= prompt("Enter size of grid?");
+                                createGrid(size);
+                                    });
+
+function createGrid(size){
+    clear();
+    if(!size){size=70;}
+    size=size*size;
+    for(let i=0;i<size;i++){    
+        const div=document.createElement("div");
+        div.id="square";
+        div.style.width=`${Math.sqrt((30*30)/size)}vw`;
+        div.style.height=`${Math.sqrt((30*30)/size)}vw`;
+        container.appendChild(div);
+    }
+
+function clear(){
+    const squares=document.querySelectorAll("#square")
+    squares.forEach(squares=>{
+        squares.remove();
+    });
+}
+
+function colorSquare(){
+    if(mouseClick){
+    this.style.backgroundColor=input.value;
+    }
+}
+
+const squares=document.querySelectorAll("#square");
+const input=document.querySelector("#sketch-color");
+squares.forEach(squares=>squares.addEventListener('mousemove',colorSquare));
+
+}
+</script>
